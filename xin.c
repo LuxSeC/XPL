@@ -2,16 +2,14 @@
 #include <Windows.h>
 #include <string.h>
 
-char allString[1024];
-
 /*
 业务通信的创建与销毁函数.
 */
 XHANDLE		__stdcall xin_init(const char * account, const char * sn, xinsettings_t * settings)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "account: %s\nsn: %s\nsettings: %s", account, sn, settings);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_init), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("account: %s\nsn: %s\nsettings: %s"), account, sn, settings);
+	MessageBox(NULL, allString, TEXT("xin_init"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -32,9 +30,9 @@ void		__stdcall xin_set_logcb(XHANDLE h, xin_log_cb log_cb)
 */
 int __stdcall xin_bind(XHANDLE * h, xbind_t * bind)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "user: %s", bind->user);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_bind), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("user: %s"), bind->user);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_bind"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -47,9 +45,9 @@ int __stdcall xin_bind(XHANDLE * h, xbind_t * bind)
 */
 int __stdcall xin_unbind(XHANDLE * h, xunbind_t * unbind)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "user: %s", unbind->user);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_unbind), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("user: %s"), unbind->user);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_unbind"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -59,9 +57,9 @@ int __stdcall xin_unbind(XHANDLE * h, xunbind_t * unbind)
 */
 int __stdcall xin_compare(XHANDLE * h, xcompare_t * c)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "sIDNO: %s\nFingerCode: %s", c->sIDNO, c->FingerCode.pdata);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_compare), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("sIDNO: %s\nFingerCode: %s"), c->sIDNO, c->FingerCode.pdata);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_compare"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -70,9 +68,9 @@ int __stdcall xin_compare(XHANDLE * h, xcompare_t * c)
 */
 int __stdcall xin_pclock(XHANDLE * h, xpclock_t * c)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "iTime: %s\sIDNO: %s\nsPCNO: %s", c->iTime, c->sIDNO, c->sPCNO);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_pclock), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("iTime: %s\nIDNO: %s\nsPCNO: %s"), c->iTime, c->sIDNO, c->sPCNO);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_pclock"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -81,9 +79,9 @@ int __stdcall xin_pclock(XHANDLE * h, xpclock_t * c)
 */
 int __stdcall xin_pcunlock(XHANDLE * h, xpcunlock_t * c)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "iTime: %s\sIDNO: %s\nsPCNO: %s", c->iTime, c->sIDNO, c->sPCNO);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_pcunlock), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("iTime: %s\nIDNO: %s\nsPCNO: %s"), c->iTime, c->sIDNO, c->sPCNO);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_pcunlock"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -92,9 +90,9 @@ int __stdcall xin_pcunlock(XHANDLE * h, xpcunlock_t * c)
 */
 int __stdcall xin_query(XHANDLE h, xquery_t * c)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "IDNO: %s", c->sIDNO);
-	MessageBox(NULL, TEXT(allString), TEXT(xin_query), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("IDNO: %s"), c->sIDNO);
+	MessageBox(NULL, TEXT(allString), TEXT("xin_query"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
@@ -103,17 +101,17 @@ int __stdcall xin_query(XHANDLE h, xquery_t * c)
 */
 int __stdcall xrawdata_init(xrawdata_t * raw, const char * data, unsigned int size)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "pdata: %s\nsize: %d\ndata: %s\nsize: %d", raw->pdata, raw->size, data, size);
-	MessageBox(NULL, TEXT(allString), TEXT(xrawdata_init), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("pdata: %s\nsize: %d\ndata: %s\nsize: %d"), raw->pdata, raw->size, data, size);
+	MessageBox(NULL, TEXT(allString), TEXT("xrawdata_init"), MB_OK | MB_ICONINFORMATION);
 	return 0;
 }
 
 void __stdcall xrawdata_uninit(xrawdata_t * raw)
 {
-	memset(allString, 0, sizeof(allString));
-	sprintf(allString, "pdata: %s\nsize: %d", raw->pdata, raw->size);
-	MessageBox(NULL, TEXT(allString), TEXT(xrawdata_uninit), MB_OK | MB_ICONINFORMATION);
+	TCHAR allString[1024] = { 0 };
+	wsprintf(allString, TEXT("pdata: %s\nsize: %d"), raw->pdata, raw->size);
+	MessageBox(NULL, TEXT(allString), TEXT("xrawdata_uninit"), MB_OK | MB_ICONINFORMATION);
 }
 
 char * utf8_to_gb(const char * string)
